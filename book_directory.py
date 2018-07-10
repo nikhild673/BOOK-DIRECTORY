@@ -5,6 +5,11 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter.scrolledtext import ScrolledText
 import sqlite3
+# import backend
+
+conn=sqlite3.connect("directory.db")
+c=conn.cursor()
+c.execute("CREATE TABLE IF NOT EXISTS book(Title char,Author int,Year int,ISBN int)")
 
 def exit():
     result=messagebox.askyesno("Alert","do you want to exit")
@@ -12,6 +17,26 @@ def exit():
         sys.exit()
     else:
         pass
+
+def add_entry():
+    conn = sqlite3.connect("directory.db")
+    c = conn.cursor()
+    a=entry1.get()
+    b=entry2.get()
+    cd=entry3.get()
+    d=entry4.get()
+    c.execute("insert into book(Title,Author,Year,ISBN) VALUES (?,?,?,?)",(a,b,cd,d))
+    conn.commit()
+
+
+def view_all():
+    conn = sqlite3.connect("directory.db")
+    c = conn.cursor()
+    c.execute("select * from book");
+    for row in c.fetchall():
+        l.insert(END,row)
+    conn.commit()
+
 
 root=Tk()
 root.title("Boook Directory")
@@ -39,11 +64,11 @@ label4.grid(row=1,column=2)
 entry4=Entry(root,width=35)
 entry4.grid(row=1,column=3)
 
-b1=Button(root,text="View All",width=20,height=2)
+b1=Button(root,text="View All",width=20,height=2,command=view_all)
 b1.place(x=320,y=42)
 b2=Button(root,text="Search Entry",width=20,height=2)
 b2.place(x=320,y=84)
-b3=Button(root,text="Add Entry",width=20,height=2)
+b3=Button(root,text="Add Entry",width=20,height=2,command=add_entry)
 b3.place(x=320,y=126)
 b4=Button(root,text="Update Selected",width=20,height=2)
 b4.place(x=320,y=168)
