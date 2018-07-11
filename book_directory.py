@@ -54,18 +54,22 @@ def Update_selected():
     d = entry4.get()
     t = l.get(ACTIVE)
     i = t[3]
-    c.execute("UPDATE book SET Title=?,Author=?,Year=? WHERE ISBN=?",(a,b,cd,i))
+    c.execute("UPDATE book SET Title=?,Author=?,Year=?,ISBN=? WHERE ISBN=?",(a,b,cd,d,i))
     conn.commit()
     view_all()
 
 def delete():
     conn = sqlite3.connect("directory.db")
     c = conn.cursor()
-    t=l.get(ACTIVE)
-    i=t[3]
-    c.execute("DELETE FROM book WHERE ISBN=?",(i,));
-    conn.commit()
-    view_all()
+    selection=l.curselection()
+    if selection:
+        t=l.get(ACTIVE)
+        i=t[3]
+        c.execute("DELETE FROM book WHERE ISBN=?",(i,));
+        conn.commit()
+        view_all()
+    else:
+        pass
 
 def exit():
     result=messagebox.askyesno("Alert","do you want to exit")
