@@ -45,6 +45,19 @@ def add_entry():
     conn.commit()
     view_all()
 
+def Update_selected():
+    conn = sqlite3.connect("directory.db")
+    c = conn.cursor()
+    a = entry1.get()
+    b = entry2.get()
+    cd = entry3.get()
+    d = entry4.get()
+    t = l.get(ACTIVE)
+    i = t[3]
+    c.execute("UPDATE book SET Title=?,Author=?,Year=? WHERE ISBN=?",(a,b,cd,i))
+    conn.commit()
+    view_all()
+
 def delete():
     conn = sqlite3.connect("directory.db")
     c = conn.cursor()
@@ -94,7 +107,7 @@ b2=Button(root,text="Search Entry",width=20,height=2,command=Search_Entry)
 b2.place(x=320,y=84)
 b3=Button(root,text="Add Entry",width=20,height=2,command=add_entry)
 b3.place(x=320,y=126)
-b4=Button(root,text="Update Selected",width=20,height=2)
+b4=Button(root,text="Update Selected",width=20,height=2,command=Update_selected)
 b4.place(x=320,y=168)
 b5=Button(root,text="Delete Selected",width=20,height=2,command=delete)
 b5.place(x=320,y=210)
