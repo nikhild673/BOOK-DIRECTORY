@@ -11,12 +11,28 @@ conn=sqlite3.connect("directory.db")
 c=conn.cursor()
 c.execute("CREATE TABLE IF NOT EXISTS book(Title char,Author int,Year int,ISBN int)")
 
-def exit():
-    result=messagebox.askyesno("Alert","do you want to exit")
-    if result==True:
-        sys.exit()
-    else:
-        pass
+
+def view_all():
+    conn = sqlite3.connect("directory.db")
+    c = conn.cursor()
+    c.execute("select * from book");
+    l.delete(0, END)
+    for row in c.fetchall():
+        l.insert(END,row)
+    conn.commit()
+
+def Search_Entry():
+    conn = sqlite3.connect("directory.db")
+    c = conn.cursor()
+    a = entry1.get()
+    b = entry2.get()
+    cd = entry3.get()
+    d = entry4.get()
+    l.delete(0, END)
+    c.execute("SELECT * FROM book WHERE Title=? or Author=? or Year=? or ISBN=?",(a,b,cd,d))
+    for row in c.fetchall():
+        l.insert(END, row)
+    conn.commit()
 
 def add_entry():
     conn = sqlite3.connect("directory.db")
@@ -27,15 +43,23 @@ def add_entry():
     d=entry4.get()
     c.execute("insert into book(Title,Author,Year,ISBN) VALUES (?,?,?,?)",(a,b,cd,d))
     conn.commit()
+    view_all()
 
-
-def view_all():
+def delete():
     conn = sqlite3.connect("directory.db")
     c = conn.cursor()
-    c.execute("select * from book");
-    for row in c.fetchall():
-        l.insert(END,row)
+    t=l.get(ACTIVE)
+    i=t[3]
+    c.execute("DELETE FROM book WHERE ISBN=?",(i,));
     conn.commit()
+    view_all()
+
+def exit():
+    result=messagebox.askyesno("Alert","do you want to exit")
+    if result==True:
+        sys.exit()
+    else:
+        pass
 
 
 root=Tk()
@@ -66,13 +90,13 @@ entry4.grid(row=1,column=3)
 
 b1=Button(root,text="View All",width=20,height=2,command=view_all)
 b1.place(x=320,y=42)
-b2=Button(root,text="Search Entry",width=20,height=2)
+b2=Button(root,text="Search Entry",width=20,height=2,command=Search_Entry)
 b2.place(x=320,y=84)
 b3=Button(root,text="Add Entry",width=20,height=2,command=add_entry)
 b3.place(x=320,y=126)
 b4=Button(root,text="Update Selected",width=20,height=2)
 b4.place(x=320,y=168)
-b5=Button(root,text="Delete Selected",width=20,height=2)
+b5=Button(root,text="Delete Selected",width=20,height=2,command=delete)
 b5.place(x=320,y=210)
 b6=Button(root,text="Exit",width=20,height=2,command=exit)
 b6.place(x=320,y=252)
