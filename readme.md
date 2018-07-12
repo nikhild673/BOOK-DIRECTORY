@@ -2,7 +2,7 @@
 
 ![banner](https://user-images.githubusercontent.com/33093754/42650088-1f0d23d0-8629-11e8-9558-65ad35707a16.JPG)
 
-## Technology Utillized
+## Things used in project
 * Tkinter
 * SQLite
 ## Usage guidelines
@@ -14,5 +14,5 @@ To delete an entry, click the View **All button**, then click on the entry to de
 
 # INSTALLATION
 <pre><i><n>git clone https://github.com/malay190/BOOK-DIRECTORY.git
-python FRONTend(open.PY
+python book_directory.py
 </pre></i></n>
