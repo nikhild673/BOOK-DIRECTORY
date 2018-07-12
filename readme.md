@@ -1,6 +1,6 @@
 # Book Directory Software
 
-![banner](https://user-images.githubusercontent.com/32105561/42615832-85b022d2-85c9-11e8-9b92-7a37ed616417.gif)
+![banner](https://user-images.githubusercontent.com/33093754/42650088-1f0d23d0-8629-11e8-9558-65ad35707a16.JPG)
 
 ## Technology Utillized
 * Tkinter
@@ -13,6 +13,6 @@ To update an entry, click the View All button, then click on the entry to update
 To delete an entry, click the View **All button**, then click on the entry to delete and click the Delete Selected button. Lastly, to close the app, click the Close button.
 
 # INSTALLATION
-<pre><i><n>git clone https://github.com/mmaithani/My-Python-projects/edit/master/1.book_dictionary
+<pre><i><n>git clone https://github.com/malay190/BOOK-DIRECTORY.git
 python FRONTend(open.PY
 </pre></i></n>
