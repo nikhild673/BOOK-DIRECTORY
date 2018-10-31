@@ -25,6 +25,6 @@ def add_entry():
 def view_all():
     cursor = sqlite3.connect('test.db')
     cursor.execute("select * from book");
-    # l.insert(END,entry1.get())
+   # l.insert(END,entry1.get())
     cursor.commit()
     cursor.close()
